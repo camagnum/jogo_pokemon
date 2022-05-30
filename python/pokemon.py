@@ -26,12 +26,16 @@ class Pkmn_select:
             self.hp -= opp_attack;
         else:
             self.hp = 0;
-        print(self.trainer_name + "'s " + self.name + "'s got " + str(opp_attack) + " damage!");
+        time.sleep(1)
+        print("\n" + self.trainer_name + "'s " + self.name + "'s got " + str(opp_attack) + " damage!");
+        time.sleep(1)
         print(self.trainer_name + "'s " + self.name + "'s HP now is " + str(self.hp) + ".");
 
     def heal(self):
         self.hp += self.cure;
-        print("You've healed " + str(self.cure) + " of yourself HP.");
+        time.sleep(1)
+        print("\n" + self.trainer_name + "'s " + self.name + "'s healed " + str(self.cure) + " of itself HP.");
+        time.sleep(1)
         print(self.trainer_name + "'s " + self.name + "'s HP now is " + str(self.hp) + ".");
 
 # Pokémon Battle
@@ -61,33 +65,39 @@ while True:
     while True:
         action = input("\nChoose your action: \na) Attack\nb) Heal\nc) Run!\n")
         if action == 'a':
+            print("\n" + pkmn_usr.trainer_name + "'s " + pkmn_usr.name + " attacks!")
             pkmn_cpu.damage(pkmn_usr.attack);
             break
         elif action == 'b':
+            print("\n" + pkmn_usr.trainer_name + "'s " + pkmn_usr.name + " heals itself!")
             pkmn_usr.heal();
             break
         elif action == 'c':
+            print("\n" + pkmn_usr.trainer_name + "'s " + pkmn_usr.name + " ran away!")
             pkmn_usr.hp = 0;
             break
         else:
-            print("Select a correct option")
+            print("Select a correct option.")
 
     # CPU's round
-    cpu_action = options[random.randint(0,2)]
-    if cpu_action == 'a':
-        pkmn_usr.damage(pkmn_cpu.attack);
-    elif cpu_action == 'b':
-        pkmn_cpu.heal();
-    elif cpu_action == 'c':
-        pkmn_cpu.hp = 0;
+    if pkmn_cpu.hp > 0:
+        cpu_action = options[random.randint(0,1)]
+        if cpu_action == 'a':
+            print("\n" + pkmn_cpu.trainer_name + "'s " + pkmn_cpu.name + " attacks!")
+            pkmn_usr.damage(pkmn_cpu.attack);
+        elif cpu_action == 'b':
+            print("\n" + pkmn_cpu.trainer_name + "'s " + pkmn_cpu.name + " heals itself.")
+            pkmn_cpu.heal();
 
 # Finish conditions
     if pkmn_usr.hp <= 0:
-        print("\nCPU wins!")
+        time.sleep(1)
+        print("\n" + pkmn_cpu.trainer_name + " wins!")
         break
     
     if pkmn_cpu.hp <= 0:
-        print(pkmn_usr.trainer_name + "\n win!")
+        time.sleep(1)
+        print("\n" + pkmn_usr.trainer_name + " wins!")
         break
 
 print("Game Over")
